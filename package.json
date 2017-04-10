@@ -1,0 +1,30 @@
+{
+  "name": "pho3nixhun.github.io",
+  "version": "1.0.0",
+  "description": "Personal blog of mine",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pho3nixHun/Pho3nixHun.github.io.git"
+  },
+  "author": "László Simon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pho3nixHun/Pho3nixHun.github.io/issues"
+  },
+  "homepage": "https://github.com/Pho3nixHun/Pho3nixHun.github.io#readme",
+  "jspm": {
+    "directories": {
+      "packages": "lib"
+    },
+    "configFile": "systemjs.config.js",
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  }
+}
