@@ -100,7 +100,6 @@
         }
 
         const main = async () => {
-            document.body.innerHTML = 'Betöltés...';
             const rRes = await read().catch(ex => ex);;
             const rBody = await rRes.json().catch(ex => ex);
             console.log(rBody);
@@ -132,7 +131,7 @@
 </head>
 
 <body>
-
+Betöltés...
 </body>
 
 </html>
