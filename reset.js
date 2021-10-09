@@ -1,9 +1,9 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 const headers = {
-    authorization: 'token c10943af-ec4b-4028-90e0-5de0972c3cd8'
+    'X-Master-Key': '$2b$10$5b9AlJCQ5sOxj0noLuz2EezEocWqxTZTudxG24cCmGN1wOw9XzULa'
 };
-const url = 'https://jsonbin.org/pho3nixhun';
+const url = 'https://api.jsonbin.io/b/6160d6bc4a82881d6c5d83ec/latest';
 
 const read = () => {
     return fetch(url, {
@@ -24,13 +24,13 @@ const write = (data) => {
 const main = async() => {
     const wRes = await write({
         names: {
-            'Andi': ['Lacika', 'Tibi', 'Zsófi', 'Anita', 'Andika', 'Attila'],
-            'Andika': ['Andi', 'Lacika', 'Tibi', 'Zsófi', 'Anita'],
-            'Anita': ['Andi', 'Lacika', 'Tibi', 'Zsófi', 'Andika', 'Attila'],
-            'Attila': ['Andi', 'Lacika', 'Tibi', 'Zsófi', 'Anita'],
-            'Lacika': ['Andi', 'Tibi', 'Zsófi', 'Anita', 'Andika', 'Attila'],
+            'Andi': ['Lacika', 'Tibi', 'Laci', 'Anita', 'Andika', 'Attila'],
+            'Andika': ['Andi', 'Lacika', 'Tibi', 'Laci', 'Anita'],
+            'Anita': ['Andi', 'Lacika', 'Tibi', 'Laci', 'Andika', 'Attila'],
+            'Attila': ['Andi', 'Lacika', 'Tibi', 'Laci', 'Anita'],
+            'Lacika': ['Andi', 'Tibi', 'Laci', 'Anita', 'Andika', 'Attila'],
             'Tibi': ['Andi', 'Lacika', 'Anita', 'Andika', 'Attila'],
-            'Zsófi': ['Andi', 'Lacika', 'Anita', 'Andika', 'Attila']
+            'Laci': ['Andi', 'Lacika', 'Anita', 'Andika', 'Attila']
         },
         taken: {
 

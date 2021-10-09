@@ -103,7 +103,7 @@
                 const { picked } = this;
                 if (!(picked in this.data.names)) {
                     throw new Error(`Picked name '${picked}' is not valid`);
-                } else if (this.notPicked.includes(picked)) {
+                } else if (!this.notPicked.includes(picked)) {
                     throw new Error(`Picked name '${picked}' is already picked by someone.`);
                 }
             }
@@ -136,7 +136,8 @@
             const request = await fetch(url, {
                 method: 'get',
                 headers: {
-                    authorization: `token ${token}`
+                    'X-Master-Key': token,
+                    'X-BIN-META': false
                 }
             });
             const data = await request.json();
@@ -147,9 +148,11 @@
                 throw new Error(`State instance expected, got ${state}`);
             }
             return fetch(url, {
-                method: 'post',
+                method: 'put',
                 headers: {
-                    authorization: `token ${token}`
+                    'X-Master-Key': token,
+                    'X-BIN-META': false,
+                    'Content-Type': 'application/json' 
                 },
                 body: JSON.stringify(state.data)
             });
@@ -168,8 +171,8 @@
         }
 
         const main = async () => {
-            const url = 'https://jsonbin.org/pho3nixhun/test';
-            const token = 'c10943af-ec4b-4028-90e0-5de0972c3cd8';
+            const url = 'https://api.jsonbin.io/v3/b/6160da3caa02be1d4456c67c/';
+            const token = '$2b$10$KjA6bzM7uur9YFhXy99TUO9CTPHcHTGmhWx8h89B1OHt0uavJT2iW';
             let [state] = await Promise.all([State.load(url, token), docReady()]);
     
             document.body.innerHTML = `<h1>Ki vagy?</h1>`;
