@@ -1,9 +1,11 @@
 import fetch from 'node-fetch';
 
+const token = '$2b$10$KjA6bzM7uur9YFhXy99TUO9CTPHcHTGmhWx8h89B1OHt0uavJT2iW';
 const headers = {
-    'X-Master-Key': '$2b$10$5b9AlJCQ5sOxj0noLuz2EezEocWqxTZTudxG24cCmGN1wOw9XzULa'
+    'X-Master-Key': token,
+    'X-BIN-META': false,
 };
-const url = 'https://api.jsonbin.io/b/6160d6bc4a82881d6c5d83ec/latest';
+const url = 'https://api.jsonbin.io/v3/b/6160da3caa02be1d4456c67c/';
 
 const read = () => {
     return fetch(url, {
@@ -14,8 +16,11 @@ const read = () => {
 
 const write = (data) => {
     return fetch(url, {
-        method: 'post',
-        headers,
+        method: 'put',
+        headers: {
+            ...headers, 
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(data)
     })
 }
