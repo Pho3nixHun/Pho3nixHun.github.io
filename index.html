@@ -227,7 +227,7 @@
         toggleLoading(false);
         const alreadyKnownUser = localStorage.getItem("user");
         state.user = alreadyKnownUser;
-        const alreadyPicked = state.findPicked();
+        const alreadyPicked = alreadyKnownUser ? state.findPicked() : null;
         if (alreadyPicked) {
           removeElements("button", "h1");
           addHeading(`Neki kell ajándékot venned: ${alreadyPicked}`);
