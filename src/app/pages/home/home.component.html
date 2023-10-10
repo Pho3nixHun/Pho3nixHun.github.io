@@ -1,0 +1,121 @@
+<app-snowfall
+  class="bg-secondary-900 fixed -z-10 h-screen w-screen"></app-snowfall>
+<div class="min-h-screen flex flex-col gap-4 items-center justify-center">
+  <ng-container
+    *ngIf="(isPickUserState$ | async) && (keepShowingLoading$ | async) === false"
+    [ngTemplateOutlet]="pickUserTemplate"
+    [ngTemplateOutletContext]="{ users: (users$ | async) }">
+  </ng-container>
+  <ng-container
+    *ngIf="isPickNameState$ | async"
+    [ngTemplateOutlet]="pickNameTemplate"
+    [ngTemplateOutletContext]="{ names: (availableNames$ | async), user: (user$ | async)  }">
+  </ng-container>
+  <ng-container
+    *ngIf="isDoneState$ | async"
+    [ngTemplateOutlet]="alreadyPickedNameTemplate"
+    [ngTemplateOutletContext]="{ name: (pickedName$ | async), gift: (gift$ | async) }">
+  </ng-container>
+  <ng-container
+    *ngIf="isLoadingState$ | async"
+    [ngTemplateOutlet]="loadingTemplate"></ng-container>
+  <ng-container
+    *ngIf="isErrorState$ | async"
+    [ngTemplateOutlet]="errorTemplate"></ng-container>
+</div>
+
+<ng-template #loadingTemplate>
+  <div
+    @fadeInOut
+    class="bg-primary-900 bg-opacity-75 absolute inset-0 backdrop-blur-sm flex flex-col items-center justify-center gap-8 p-20">
+    <app-facts class="basis-1/2"></app-facts>
+    <div class="basis-1/2">
+      <button
+        class="name-btn"
+        [disabled]="isLoading$ | async"
+        (click)="hideLoading()"
+        [ngClass]="{
+            'pointer-events-none': isLoading$ | async
+        }">
+        {{ ((isLoading$ | async) ?? true ? (loadingLabels$ | async) : 'GO') |
+        transloco }}
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #errorTemplate let-error="error">
+  <p class="text-white">{{ 'ERROR' | transloco: { error } }}</p>
+</ng-template>
+
+<ng-template #alreadyPickedNameTemplate let-name="name" let-gift="gift">
+  <h1 class="text-white font-[lobster] text-center word-3" *ngIf="name">
+    {{ 'YOUVE-BECOME-SECRET-SANTA-OF' | transloco: { name } }}
+  </h1>
+  <p class="text-white font-[lobster] text-lg">
+    {{ 'NAME-WOULD-LIKE-TO-GET' | transloco: { name } }}
+  </p>
+  <div class="text-white font-[lobster] px-4 py-6 w-5/6 text-center text-lg">
+    {{ pickedNameGift$ | async }}
+  </div>
+  <div class="flex flex-col w-5/6 gap-4">
+    <label
+      for="gift"
+      class="font-[lobster] text-white mt-10 basis-full text-lg">
+      {{ 'WHAT-WOULD-YOU-LIKE-TO-GET' | transloco }}
+    </label>
+    <textarea
+      #giftInput
+      id="gift"
+      [value]="gift"
+      [placeholder]="'GIFT-IDEA-PLACEHOLDER' | transloco"
+      class="rounded-md bg-secondary-900 backdrop-blur-sm border-2 border-[crimson] px-4 py-2 text-white text-lg">
+    </textarea>
+    <button
+      *ngIf="user$ | async as user"
+      class="name-btn self-center"
+      (click)="setGift(user, giftInput.value)">
+      Mentés
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #pickNameTemplate let-names="names" let-user="user">
+  <h1 class="font-[lobster] text-white mb-10 basis-full text-center">
+    {{ 'HI-PLEASE-CHOOSE' | transloco: { name: user } }}
+  </h1>
+  <div
+    class="flex flex-wrap gap-y-10 gap-x-3 justify-center items-center"
+    [@fadeInStaggered]="names.length">
+    <app-gift-box
+      *ngFor="let name of names; let i = index"
+      (click)="pickName(name)"
+      class="cursor-pointer"
+      [ngStyle]="{
+        '--delay': (i+i/2) + 's',
+        '--color-1': colors[i % colors.length],
+        '--color-2': colors[(i + 2) % colors.length],
+        '--top-color': colors[i % colors.length],
+        '--ribbon-color': colors[i % colors.length]
+      }">
+    </app-gift-box>
+  </div>
+</ng-template>
+
+<ng-template #pickUserTemplate let-users="users">
+  <div
+    class="flex flex-wrap gap-x-4 gap-y-4 justify-center"
+    [@fallFadeIn]="users.length">
+    <h1 class="font-[lobster] text-white mb-10 basis-full text-center">
+      Ki vagy?
+    </h1>
+    <button
+      *ngFor="let name of users"
+      class="name-btn basis-1/3"
+      (click)="setUser(name)">
+      {{ name }}
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #doneState let-gift="gift"> </ng-template>

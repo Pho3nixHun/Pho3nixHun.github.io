@@ -1,0 +1,6 @@
+<p
+  @fadeInOut
+  *ngIf="fact$ | async as fact"
+  class="font-[lobster] text-white text-4xl text-center">
+  {{ fact.key | transloco: (fact.data | async) ?? undefined }}
+</p>

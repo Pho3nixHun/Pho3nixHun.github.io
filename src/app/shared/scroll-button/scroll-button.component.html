@@ -1,0 +1,18 @@
+<button 
+    class="flex items-center gap-1"
+    [ngClass]="{
+        'flex-col': direction === ScrollDirection.Down,
+        'flex-col-reverse': direction === ScrollDirection.Up,
+        'flex-row-reverse': direction === ScrollDirection.Left
+    }"
+>
+    <ng-content></ng-content>
+    <div class="flex flex-col animate-bounce" [ngClass]="{
+        'rotate-90 mr-5': direction === ScrollDirection.Left,
+        'rotate-180': direction === ScrollDirection.Up,
+        'rotate-270 ml-5': direction === ScrollDirection.Right,
+    }">
+        <fa-icon class="opacity-60" [icon]="['fas', 'angle-down']"></fa-icon>
+        <fa-icon class="-mt-5" [icon]="['fas', 'angle-down']"></fa-icon>
+    </div>
+</button>

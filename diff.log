@@ -1,0 +1,59 @@
+diff --git a/src/app/core/footer/footer.component.html b/src/app/core/footer/footer.component.html
+new file mode 100644
+index 0000000..28c0d7d
+--- /dev/null
++++ b/src/app/core/footer/footer.component.html
+@@ -0,0 +1 @@
++<p>footer works!</p>
+diff --git a/src/app/core/footer/footer.component.scss b/src/app/core/footer/footer.component.scss
+new file mode 100644
+index 0000000..e69de29
+diff --git a/src/app/core/footer/footer.component.spec.ts b/src/app/core/footer/footer.component.spec.ts
+new file mode 100644
+index 0000000..61e124f
+--- /dev/null
++++ b/src/app/core/footer/footer.component.spec.ts
+@@ -0,0 +1,21 @@
++import { ComponentFixture, TestBed } from '@angular/core/testing';
++
++import { FooterComponent } from './footer.component';
++
++describe('FooterComponent', () => {
++  let component: FooterComponent;
++  let fixture: ComponentFixture<FooterComponent>;
++
++  beforeEach(() => {
++    TestBed.configureTestingModule({
++      imports: [FooterComponent]
++    });
++    fixture = TestBed.createComponent(FooterComponent);
++    component = fixture.componentInstance;
++    fixture.detectChanges();
++  });
++
++  it('should create', () => {
++    expect(component).toBeTruthy();
++  });
++});
+diff --git a/src/app/core/footer/footer.component.ts b/src/app/core/footer/footer.component.ts
+new file mode 100644
+index 0000000..c40e830
+--- /dev/null
++++ b/src/app/core/footer/footer.component.ts
+@@ -0,0 +1,16 @@
++import { Component } from '@angular/core';
++import { CommonModule } from '@angular/common';
++
++@Component({
++  selector: 'app-footer',
++  standalone: true,
++  imports: [CommonModule],
++  templateUrl: './footer.component.html',
++  styleUrls: ['./footer.component.scss'],
++  host: {
++    class: /*tw*/ 'bg-neutral-900 text-white py-2 px-4 block'
++  }
++})
++export class FooterComponent {
++
++}

@@ -1,0 +1,18 @@
+<div class="flex justify-end grow gap-4">
+  <div class="flex flex-col justify-center items-start basis-4/12 gap-4">
+    <h1>{{ 'HERO.TITLE_{1|2|3}' | randomKey: 'hero' | transloco }}</h1>
+    <p>{{ 'HERO.DESCRIPTION_{1|2|3}' | randomKey: 'hero' | transloco }}</p>
+    <button primary>
+      {{ 'HERO.BUTTON_{1|2|3}' | randomKey: 'hero' | transloco }}
+    </button>
+  </div>
+  <app-media-slider class="basis-7/12 self-center">
+    <img src="https://via.placeholder.com/800x400" alt="Media item" />
+    <img src="https://via.placeholder.com/800x400" alt="Media item" />
+    <img src="https://via.placeholder.com/800x400" alt="Media item" />
+    <img src="https://via.placeholder.com/800x400" alt="Media item" />
+  </app-media-slider>
+</div>
+<app-scroll-button class="self-center" [direction]="ScrollDirection.Down">
+  {{ 'HERO.SCROLL_TO_EXPLORE' | transloco }}
+</app-scroll-button>
