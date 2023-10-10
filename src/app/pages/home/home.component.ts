@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeroComponent } from 'src/app/shared/hero/hero.component';
 import { SnowfallComponent } from 'src/app/shared/snowfall/snowfall.component';
 import { NamePickerStoreModule } from 'src/app/stores/name-picker/name-picker.module';
 import { Store } from '@ngrx/store';
@@ -32,7 +31,6 @@ import { GiftBoxComponent } from 'src/app/shared/gift-box/gift-box.component';
   standalone: true,
   imports: [
     CommonModule,
-    HeroComponent,
     SnowfallComponent,
     NamePickerStoreModule,
     FactsComponent,
